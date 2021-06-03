@@ -48,3 +48,27 @@ export const Orders = () => {
     return html
 }
 
+document.addEventListener(
+    "click",
+    (clickEvent) => {
+        const itemClicked = clickEvent.target
+        if (itemClicked.id.startsWith("employee")) {
+            const [,employeeId] = itemClicked.id.split("--")
+
+            for (const employee of employees) {
+                if (employee.id === parseInt(employeeId)) {
+
+                    const employeeOrder = orders.filter(
+                        (order) => {
+                            if (order.employeeId === employee.id) {
+                                return true
+                            }
+                        }
+                    )
+                    window.alert(`${employee.name} sold ${employeeOrder.length} products `)
+                }
+            }
+        }
+    }
+)
+
